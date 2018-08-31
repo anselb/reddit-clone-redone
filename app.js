@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -21,6 +22,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+mongoose.Promise = global.Promise
+mongoose.connect('mongodb://localhost/redditclone2', { useNewUrlParser: true })
+mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection Error:'))
+mongoose.set('debug', true)
 
 app.use('/', index);
 app.use('/users', users);

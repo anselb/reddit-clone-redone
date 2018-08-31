@@ -1,3 +1,5 @@
+const Post = require('../models/post')
+
 module.exports = (app) => {
   //GET
   app.get('/posts/new', (req, res) => {
@@ -5,7 +7,16 @@ module.exports = (app) => {
   })
 
   //CREATE
-  app.post('/posts/new', (req, res) => {
-    console.log(req.body)
+  app.post('/posts/', (req, res) => {
+    //Instatiate instance of post model
+    var post = new Post(req.body)
+
+    //Save instance of post model to db
+    post.save((err, post) => {
+      console.log(err)
+      console.log(post)
+      //Redirect to root
+      return res.redirect('/')
+    })
   })
 }
