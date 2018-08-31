@@ -12,7 +12,6 @@ const PostSchema = new Schema({
 PostSchema.pre('save', function(next) {
   //Set createdAt and updatedAt times
   const now = new Date()
-  console.log(now)
   this.updatedAt = now
   if (!this.createdAt) {
     this.createdAt = now
