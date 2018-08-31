@@ -103,5 +103,7 @@ typings/
 # Serverless directories
 .serverless
 
+# My note file
+notes.md
 
 # End of https://www.gitignore.io/api/node,macos
