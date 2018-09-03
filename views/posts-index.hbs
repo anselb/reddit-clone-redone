@@ -1,1 +1,12 @@
-{{posts}}
+<ul>
+  {{#each posts}}
+  <li class="list-item-group">
+    <div class="lead">
+      {{this.title}}
+    </div>
+    <a href="{{this.url}}" target="_blank">
+      {{this.url}}
+    </a>
+  </li>
+  {{/each}}
+</ul>
