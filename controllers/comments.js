@@ -1,4 +1,5 @@
 const Comment = require('../models/comment')
+const Post = require('../models/post')
 
 module.exports = (app) => {
   //Create comment
@@ -6,7 +7,12 @@ module.exports = (app) => {
     const comment = new Comment(req.body)
 
     comment.save().then((comment) => {
-      return res.redirect('/')
+      return Post.findById(req.params.postId)
+    }).then((post) => {
+      post.comments.unshift(comment)
+      return post.save()
+    }).then((post) => {
+      res.redirect('/')
     }).catch((err) => {
       console.log(err)
     })
