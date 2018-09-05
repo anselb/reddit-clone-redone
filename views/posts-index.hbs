@@ -2,7 +2,9 @@
   {{#each posts}}
   <li class="list-item-group">
     <div class="lead">
-      {{this.title}}
+      <a href="/posts/{{this._id}}" class="lead">
+        {{this.title}}
+      </a>
     </div>
     <a href="{{this.url}}" target="_blank">
       {{this.url}}
