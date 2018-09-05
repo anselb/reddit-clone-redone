@@ -1,6 +1,11 @@
 const Post = require('../models/post')
 
 module.exports = (app) => {
+  //Get posts creation page
+  app.get('/posts/new', (req, res) => {
+    res.render('posts-new')
+  })
+
   //Get individual post
   app.get('/posts/:id', (req, res) => {
     //Look up post
@@ -9,11 +14,6 @@ module.exports = (app) => {
     }).catch((err) => {
       console.log(err.message)
     })
-  })
-
-  //Get posts creation page
-  app.get('/posts/new', (req, res) => {
-    res.render('posts-new')
   })
 
   //Create a new post
