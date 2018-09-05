@@ -32,6 +32,7 @@ app.use('/', index);
 app.use('/users', users);
 
 require('./controllers/posts')(app);
+require('./controllers/subreddits')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
