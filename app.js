@@ -33,6 +33,7 @@ app.use('/users', users);
 
 require('./controllers/posts')(app);
 require('./controllers/subreddits')(app);
+require('./controllers/comments')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
