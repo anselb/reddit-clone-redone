@@ -7,9 +7,11 @@
     "test": "mocha"
   },
   "dependencies": {
+    "bcrypt": "^3.0.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "dotenv": "^6.0.0",
     "express": "~4.15.5",
     "hbs": "~4.0.1",
     "mongoose": "^5.2.12",
