@@ -18,15 +18,20 @@ module.exports = (app) => {
 
   //Create a new post
   app.post('/posts/', (req, res) => {
-    //Instatiate instance of post model
-    var post = new Post(req.body)
+    //Check if user is logged in
+    if (req.user) {
+      //Instatiate instance of post model
+      var post = new Post(req.body)
 
-    //Save instance of post model to db
-    post.save((err, post) => {
-      console.log(err)
-      console.log(post)
-      //Redirect to root
-      return res.redirect('/')
-    })
+      //Save instance of post model to db
+      post.save((err, post) => {
+        console.log(err)
+        console.log(post)
+        //Redirect to root
+        return res.redirect('/')
+      })
+    } else {
+      return res.status(401)
+    }
   })
 }
