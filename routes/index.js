@@ -5,11 +5,10 @@ const Post = require('../models/post')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  //Check if cookie exists
-  console.log(req.cookies)
-  
+  var currentUser = req.user
+
   Post.find({}).then((posts) => {
-    res.render('posts-index.hbs', { posts })
+    res.render('posts-index.hbs', { posts, currentUser })
   }).catch((err) => {
     console.log(err.message)
   })
