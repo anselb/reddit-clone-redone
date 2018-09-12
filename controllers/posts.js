@@ -1,4 +1,5 @@
 const Post = require('../models/post')
+const User = require('../models/user')
 
 module.exports = (app) => {
   //Get posts creation page
@@ -9,7 +10,7 @@ module.exports = (app) => {
   //Get individual post
   app.get('/posts/:id', (req, res) => {
     //Look up post
-    Post.findById(req.params.id).populate('comments').then((post) => {
+    Post.findById(req.params.id).populate('author', 'username').populate('comments').then((post) => {
       res.render('posts-show.hbs', { post })
     }).catch((err) => {
       console.log(err.message)
@@ -22,13 +23,17 @@ module.exports = (app) => {
     if (req.user) {
       //Instatiate instance of post model
       var post = new Post(req.body)
+      post.author = req.user._id
 
       //Save instance of post model to db
-      post.save((err, post) => {
-        console.log(err)
-        console.log(post)
-        //Redirect to root
-        return res.redirect('/')
+      post.save().then((post) => {
+        return User.findById(req.user._id)
+      }).then((user) => {
+        user.posts.unshift(post)
+        user.save()
+        res.redirect('/posts/' + post._id)
+      }).catch((err) => {
+        console.log(err.message)
       })
     } else {
       return res.status(401)

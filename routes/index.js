@@ -7,7 +7,7 @@ const Post = require('../models/post')
 router.get('/', function(req, res, next) {
   var currentUser = req.user
 
-  Post.find({}).then((posts) => {
+  Post.find({}).populate('author', 'username').then((posts) => {
     res.render('posts-index.hbs', { posts, currentUser })
   }).catch((err) => {
     console.log(err.message)
