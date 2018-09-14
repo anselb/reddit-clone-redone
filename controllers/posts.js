@@ -10,7 +10,16 @@ module.exports = (app) => {
   //Get individual post
   app.get('/posts/:id', (req, res) => {
     //Look up post
-    Post.findById(req.params.id).populate('author', 'username').populate('comments').then((post) => {
+    Post.findById(req.params.id)
+      .populate('author', 'username')
+      .populate({
+        path: 'comments',
+        model: 'Comment',
+        populate: {
+            path: 'author',
+            model: 'User'
+        }
+      }).then((post) => {
       res.render('posts-show.hbs', { post })
     }).catch((err) => {
       console.log(err.message)
