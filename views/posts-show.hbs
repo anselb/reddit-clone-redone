@@ -19,6 +19,7 @@
       <p>
         {{this.content}}
         by:{{this.author.username}}
+        <a href="/posts/{{../post._id}}/comments/{{this._id}}/replies/new">Reply</a>
       </p>
     {{/each}}
   </div>

@@ -50,6 +50,7 @@ app.use('/users', users);
 require('./controllers/posts')(app);
 require('./controllers/subreddits')(app);
 require('./controllers/comments')(app);
+require('./controllers/replies')(app);
 require('./controllers/auth')(app);
 
 // catch 404 and forward to error handler

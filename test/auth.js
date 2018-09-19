@@ -28,7 +28,8 @@ it('should be able to sign up', (done) => {
       .send({ username: 'username', password: 'password' })
       .end(function (err, res) {
         console.log("RES.BODY")
-        console.log(res.req._headers)
+        // console.log(res.req._headers)
+        console.log(res.body)
         res.should.have.status(200)
         //FIXME: cannot find cookies
         res.should.have.cookie('nToken')
