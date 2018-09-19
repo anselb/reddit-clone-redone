@@ -20,6 +20,15 @@ module.exports = app => {
 
   //Create a new comment
   app.post('/posts/:postId/comments/:commentId/replies', (req, res) => {
-    console.log(req.body)
+    Post.findById(req.params.postId).then((post) => {
+      //Find child comment of parent post and add the reply
+      var comment = post.comments.id(req.params.commentId)
+      comment.comments.unshift(req.body)
+      return post.save()
+    }).then((post) => {
+      res.redirect('/posts/' + post._id)
+    }).catch((err) => {
+      console.log(err.message)
+    })
   })
 }
