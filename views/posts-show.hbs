@@ -15,12 +15,10 @@
         </button>
       </div>
     </form>
-    {{#each post.comments}}
-      <p>
-        {{this.content}}
-        by:{{this.author.username}}
-        <a href="/posts/{{../post._id}}/comments/{{this._id}}/replies/new">Reply</a>
-      </p>
-    {{/each}}
+    <div class="row">
+      {{#each post.comments}}
+        {{> comment}}
+      {{/each}}
+    </div>
   </div>
 </div>

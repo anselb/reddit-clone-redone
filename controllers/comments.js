@@ -5,6 +5,10 @@ const User = require('../models/user')
 module.exports = (app) => {
   //Create comment
   app.post('/posts/:postId/comments', function (req, res) {
+    //Get postId of parent post and save it with comment
+    let postId = req.params.postId
+    req.body.postId = postId
+
     const comment = new Comment(req.body)
     comment.author = req.user._id
 
