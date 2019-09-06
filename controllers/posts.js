@@ -32,6 +32,12 @@ module.exports = (app) => {
   app.post('/posts/', (req, res) => {
     //Check if user is logged in
     if (req.user) {
+      // Clean everything
+      req.body.title = req.sanitize(req.body.title)
+      req.body.subreddit = req.sanitize(req.body.subreddit)
+      req.body.url = req.sanitize(req.body.url)
+      req.body.summary = req.sanitize(req.body.summary)
+
       //Instatiate instance of post model
       var post = new Post(req.body)
       post.author = req.user._id

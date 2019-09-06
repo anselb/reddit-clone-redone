@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose')
 var jwt = require('jsonwebtoken')
 var hbs = require('hbs');
+var expressSanitizer = require('express-sanitizer');
 require('dotenv').config()
 
 var index = require('./routes/index');
@@ -26,6 +27,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(expressSanitizer());
 
 mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost/redditclone2', { useNewUrlParser: true })

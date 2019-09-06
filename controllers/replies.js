@@ -24,7 +24,7 @@ module.exports = app => {
   app.post('/posts/:postId/comments/:commentId/replies', (req, res) => {
     Post.findById(req.params.postId).then((post) => {
       //Get postId of parent post and save it with comment
-      let postId = req.params.postId
+      let postId = req.sanitize(req.params.postId)
       req.body.postId = postId
       //Set author to comment
       let author = req.user._id

@@ -4,13 +4,13 @@ const User = require('../models/user')
 
 module.exports = (app) => {
   //Create comment
-  app.post('/posts/:postId/comments', function (req, res) {
+  app.post('/posts/:postId/comments', async function (req, res) {
     //Get postId of parent post and save it with comment
     let postId = req.params.postId
-    req.body.postId = postId
+    req.body.postId = await Post.findById(postId)
 
     const comment = new Comment(req.body)
-    comment.author = req.user._id
+    comment.author = await User.findById(req.user._id)
 
     Post.findById(req.params.postId).exec(function (err, post) {
       post.comments.unshift(comment)
