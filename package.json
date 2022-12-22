@@ -15,7 +15,7 @@
     "express": "~4.15.5",
     "express-sanitizer": "^1.0.5",
     "hbs": "~4.0.1",
-    "jsonwebtoken": "^8.3.0",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.2.12",
     "morgan": "~1.9.0",
     "serve-favicon": "~2.4.5"
